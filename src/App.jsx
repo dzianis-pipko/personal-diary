@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton'
@@ -26,7 +26,24 @@ const INITIAL_DATA = [
 
 function App() {
 
-  const [items, setItems] = useState(INITIAL_DATA);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('data'))
+    if(data){
+      setItems(data.map(item => ({
+        ...item,
+        date: new Date(item.date)
+      })));
+    }
+  }, [])
+
+  useEffect(() => {
+    if(items.length){
+      console.log('Запись');
+      localStorage.setItem('data', JSON.stringify(items))
+    }
+  }, [items])
 
   const addItem = (item) => {
     setItems(oldItems => [...oldItems, {
