@@ -8,20 +8,20 @@ import Body from './layouts/Body/Body'
 import LeftPanel from './layouts/LeftPanel/LeftPanel'
 
 const INITIAL_DATA = [
-    // {
-    //   id: 1,
-    //   title: 'title1',
-    //   date: new Date(),
-    //   text: 'post1',
-    //   tag: 'tag',
-    // },
-    // {
-    //   id: 2,
-    //   title: 'title2',
-    //   date: new Date(),
-    //   text: 'post2',
-    //   tag: 'tag',
-    // },
+    {
+      id: 1,
+      title: 'title1',
+      date: new Date(),
+      text: 'post1',
+      tag: 'tag',
+    },
+    {
+      id: 2,
+      title: 'title2',
+      date: new Date(),
+      text: 'post2',
+      tag: 'tag',
+    },
   ]
 
 function App() {

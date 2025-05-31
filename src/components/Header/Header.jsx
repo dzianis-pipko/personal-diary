@@ -1,4 +1,4 @@
-import './Header.css';
+import styles from './Header.module.css';
 
 const logos = ['/logo.svg', '/vite.svg'];
 
@@ -6,7 +6,7 @@ const Header = () => {
 
 	return (
 		<div>
-			<img className='logo' src={logos[1]} alt="Логотип журнала" />;
+			<img className={styles.logo} src={logos[1]} alt="Логотип журнала" />;
 		</div>
 	);
 }
