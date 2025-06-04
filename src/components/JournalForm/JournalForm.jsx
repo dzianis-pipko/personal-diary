@@ -24,20 +24,23 @@ const JournalForm = ({onSubmit}) => {
     useEffect(() => {
         if(isFormReadyToSubmit){
             onSubmit(values)
+            dispatchForm({type: 'CLEAR'})
         }
     }, [isFormReadyToSubmit])
 
+    const onChange = (e) => {
+        dispatchForm({type: 'SET_VALUE', payload: {[e.target.name]: e.target.value}});
+    }
+
     const addJournalItem = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData)
-        dispatchForm({type: 'SUBMIT', payload: formProps})
+        dispatchForm({type: 'SUBMIT'})
     }
 
 	return (
 		<form className={styles['journal-form']} onSubmit={addJournalItem}>
             <div className={styles['form-row']}>
-				<input type='text' name='title' className={cn(styles['input-title'], {
+				<input type='text' onChange={onChange} name='title' value={values.title} className={cn(styles['input-title'], {
                     [styles.invalid]: !isValid.title
                 })} />
 			</div>
@@ -46,7 +49,7 @@ const JournalForm = ({onSubmit}) => {
 					<img src='/calendar.svg' alt='Иконка календаря'/>
 					<span>Дата</span>
 				</label>
-				<input type='date' name='date' className={cn(styles.input, {
+				<input type='date' onChange={onChange} name='date' value={values.date} className={cn(styles.input, {
                     [styles.invalid]: !isValid.date
                 })} />
 			</div>
@@ -55,11 +58,11 @@ const JournalForm = ({onSubmit}) => {
 					<img src='/folder.svg' alt='Иконка папки'/>
 					<span>Метки</span>
 				</label>
-				<input type='text' name='tag' className={cn(styles.input, {
+				<input type='text' onChange={onChange} name='tag' value={values.tag} className={cn(styles.input, {
                     [styles.invalid]: !isValid.tag
                 })} />
 			</div>
-            <textarea name='text' id='' cols={30} rows={10} className={cn(styles.input, {
+            <textarea name='text' onChange={onChange} value={values.text} id='' cols={30} rows={10} className={cn(styles.input, {
                 [styles.invalid]: !isValid.text
             })} />
             <Button text="Save" onClick={() => console.log('tap')} />
