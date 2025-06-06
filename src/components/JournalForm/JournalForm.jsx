@@ -1,9 +1,10 @@
 import styles from './JournalForm.module.css';
 import Button from '../Button/Button';
-import { useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef } from 'react';
 import cn from 'classnames';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
+import { UserContext } from '../../context/user.context';
 
 const JournalForm = ({onSubmit}) => {
 
@@ -13,6 +14,7 @@ const JournalForm = ({onSubmit}) => {
     const dateRef = useRef();
     const tagRef = useRef();
     const textRef = useRef();
+    const { userId } = useContext(UserContext);
 
     const focusError = (isValid) => {
         switch(true){
@@ -50,6 +52,10 @@ const JournalForm = ({onSubmit}) => {
             dispatchForm({type: 'CLEAR'})
         }
     }, [isFormReadyToSubmit, values, onSubmit])
+
+    useEffect(() => {
+		dispatchForm({ type: 'SET_VALUE', payload: { userId }});
+	}, [userId]);
 
     const onChange = (e) => {
         dispatchForm({type: 'SET_VALUE', payload: {[e.target.name]: e.target.value}});
