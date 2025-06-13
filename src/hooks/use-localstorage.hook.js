@@ -7,7 +7,7 @@ const useLokalStorage = (key) => {
     useEffect(() => {
         const res = JSON.parse(localStorage.getItem(key))
         if(res){
-        setData(res);
+            setData(res);
         }
     }, []);
 

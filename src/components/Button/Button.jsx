@@ -1,9 +1,10 @@
+import { memo } from 'react'
 import './Button.css'
 
-const Button = ({text, onClick}) => {
+const Button = ({children, onClick}) => {
     return (
-        <button onClick={onClick} className='button accent'>{text}</button>
+        <button onClick={onClick} className='button accent'>{children}</button>
     )
 }
 
-export default Button
+export default memo(Button);
